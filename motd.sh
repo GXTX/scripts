@@ -14,6 +14,6 @@ echo "
 ( : '~'.~.'~' : ) Load Averages......: $(uptime | grep -Eo 'load.*' | awk '{ print $3,$4,$5 }') (1, 5, 15 min)
  ~ .~ (   ) ~. ~  Running Processes..: `ps | wc -l | tr -d " "`
   (  : '~' :  )   Public IP Address..: `wget -q -O - http://icanhazip.com/ | tail`
-   '~ .~~~. ~'    Radio Temperature..: 2.4GHz: $((`wl -i eth1 phy_tempsense|awk {' print $1 '}`/2+20))C / 5GHz: $((`wl -i eth2 phy_tempsense|awk {' print $1 '}`/2+20))C
+   '~ .~~~. ~'    Temperatures.......: CPU: $((`cat /proc/dmu/temperature|awk {' print $1 '}`/10)) | 2.4GHz: $((`wl -i eth1 phy_tempsense|awk {' print $1 '}`/2+20))C / 5GHz: $((`wl -i eth2 phy_tempsense|awk {' print $1 '}`/2+20))C
        '~'
 "
