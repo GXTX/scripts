@@ -1,0 +1,17 @@
+{
+
+  "example.com":{
+    "password":"",
+    "subdomains":[
+      "@",
+      "www"
+    ]
+  },
+  "example.net":{
+    "password":"",
+    "subdomains":[
+      "secure"
+    ]
+  }
+
+}
