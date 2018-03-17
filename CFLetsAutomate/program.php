@@ -71,4 +71,5 @@ if($info['action'] == 'order') {
     }
     $certificateInfo = $order->getCertificateFile();
     vprintf("\nPrivate Key: %-20s\nPublic Key : %-20s\nCertificate: %-20s\nFull Chain : %-20s\n\n", $certificateInfo);
+    $cfHandle->delete();
 }
