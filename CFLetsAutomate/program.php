@@ -14,7 +14,7 @@
  */
 
 require_once('vendor/autoload.php');
-require_once('LEClient/LEClient/LEClient.php');
+require_once('PATHTO/LEClient.php');
 require_once('CFLetsAutomate.php');
 
 $config = [
@@ -28,7 +28,7 @@ $config = [
 ];
 
 $cfHandler = new CFLetsAutomate($config);
-$leHandler = new LEClient($config['LEEmail'], LEClient::LE_PRODUCTION, LECLient::LOG_STATUS);
+$leHandler = new LEClient($config['LEEmail'], LEClient::LE_STAGING, LECLient::LOG_STATUS);
 
 $order = $leHandler->getOrCreateOrder($config['basename'], $config['domains'], 'ec-384');
 
