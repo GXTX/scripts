@@ -206,24 +206,24 @@ sub getPacket {
     my $buf   = readLoop(4);
     my $plh = unpack( "I", $buf );
     if ( $plh == $PACKET_LEADER || $plh == $CONTROL_PACKET_LEADER ) {
-        printf "Got packet leader: %08x\n", $plh unless $quiet;
+        #printf "Got packet leader: %08x\n", $plh unless $quiet;
         
         $buf = readLoop(2);
         $ptype = unpack( "S", $buf );
-        print "Packet type: $ptype\n" unless $quiet;
+        #print "Packet type: $ptype\n" unless $quiet;
         
         $buf = readLoop(2);
         my $bc = unpack( "S", $buf );
-        print "Byte count: $bc\n" unless $quiet;
+        #print "Byte count: $bc\n" unless $quiet;
         
         $buf = readLoop(4);
         my $pid = unpack( "I", $buf );
         $nextpid = $pid;
-        printf "Packet ID: %08x\n", $pid unless $quiet;
+        #printf "Packet ID: %08x\n", $pid unless $quiet;
         
         $buf = readLoop(4);
         my $ck = unpack( "I", $buf );
-        printf "Checksum: %08x\n", $ck unless $quiet;
+        #printf "Checksum: %08x\n", $ck unless $quiet;
 
         if ($bc) {
             $payload = readLoop($bc);
@@ -254,7 +254,7 @@ sub handleDebugIO {
 
     my $apiNumber = unpack("I", substr($buf, 0, 4));
     if ($apiNumber == $DbgKdPrintStringApi) {
-        print "DBG PRINT STRING: ".substr($buf, 0x10);
+        print substr($buf, 0x10);
     }
 }
 
@@ -268,7 +268,7 @@ sub handleStateChange {
     my $quiet = shift;
 
     my $newState = unpack("I", substr($buf, 0, 4));
-    printf "State Change: %08x\n", $newState unless $quiet;
+    #printf "State Change: %08x\n", $newState unless $quiet;
     
     if ($newState == $DbgKdExceptionStateChange) {
         my %exceptions = (
@@ -374,7 +374,7 @@ sub handleStateManipulate {
     my $quiet = shift;
 
     my $apiNumber = unpack("I", substr($buf, 0, 4));
-    printf "State Manipulate: %08x\n", $apiNumber;
+    #printf "State Manipulate: %08x\n", $apiNumber;
 
     if ( $apiNumber == $DbgKdWriteBreakPointApi ) {
         my $bp = sprintf( "%08x", unpack( "I", substr( $buf, 16, 4 ) ) );
@@ -1943,6 +1943,6 @@ while ( @ready = $s->can_read ) {
         elsif ( $fh == \*FH || $fh == $socket ) {
             handlePacket(0);
         }
-        print "\n\n";
+        #print "\n\n";
     }
 }
